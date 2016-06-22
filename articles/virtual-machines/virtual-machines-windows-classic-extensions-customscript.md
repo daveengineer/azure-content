@@ -51,7 +51,7 @@ The following example creates a new VM, but the same scenario can be run on an e
     $vm = New-AzureVMConfig -Name $name -InstanceSize Small -ImageName $imagename
     $vm = Add-AzureProvisioningConfig -VM $vm -Windows -AdminUsername $username -Password $password
     // Add Custom Script Extension to the VM. The container name refer to the storage container which contains the file.
-    $vm = Set-AzureVMCustomScriptExtension -VM $vm -ContainerName $container -FileName 'start.ps1'
+    $vm = Set-AzureVMCustomScriptExtension -VM $vm -ContainerName $container -FileName 'script1.ps1','script2.ps1', -Run "script1.ps1" -StorageAccountName "mystorageaccount" -StorageAccountKey "xxxxxxxxxx"
     New-AzureVM -ServiceName $servicename -Location $location -VMs $vm
     #  After the VM is created, the extension downloads the script from the storage location and executes it on the VM.
 
